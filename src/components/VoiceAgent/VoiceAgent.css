@@ -1,0 +1,295 @@
+.voice-agent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 28px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Recorder Card ───────────────────────── */
+.voice-agent__recorder-card {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ── VoiceRecorder internals ─────────────── */
+.recorder-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.mic-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+}
+
+/* Pulse rings */
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  animation: pulse-ring 1.6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+.pulse-ring--2 { animation-delay: 0.4s; }
+.pulse-ring--3 { animation-delay: 0.8s; }
+
+.mic-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-light);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.mic-btn:hover:not(:disabled) {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.05);
+}
+
+.mic-btn--recording {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-glow);
+}
+
+.recorder-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  min-height: 20px;
+}
+
+.recorder-unsupported {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 16px;
+}
+
+.recorder-unsupported svg { color: var(--text-muted); }
+.recorder-unsupported p   { font-size: 0.9rem; color: var(--text-secondary); }
+.recorder-unsupported span { font-size: 0.78rem; }
+
+/* ── Interim transcript ──────────────────── */
+.voice-agent__interim {
+  font-size: 0.88rem;
+  color: var(--primary-light);
+  font-style: italic;
+  text-align: center;
+  animation: blink 1.2s ease infinite;
+}
+
+/* ── Error ───────────────────────────────── */
+.voice-agent__error {
+  width: 100%;
+}
+
+/* ── Exchange ────────────────────────────── */
+.voice-agent__exchange {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slide-up 0.3s ease;
+}
+
+.exchange-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.exchange-row--user {
+  flex-direction: row-reverse;
+}
+
+.exchange-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.exchange-avatar--user {
+  background: var(--primary);
+  color: #fff;
+}
+
+.exchange-avatar--agent {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  color: var(--primary-light);
+}
+
+.exchange-bubble {
+  max-width: calc(100% - 48px);
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exchange-bubble--user {
+  background: var(--primary);
+  color: #fff;
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.exchange-bubble--agent {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.exchange-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.exchange-bubble p {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* ── AudioPlayer internals ───────────────── */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.audio-player__icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.audio-player__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.audio-player__btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.audio-player__btn--playing {
+  background: #475569;
+}
+
+/* Animated waveform bars */
+.audio-player__waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 4px;
+}
+
+.audio-player__waveform span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--primary-light);
+  animation: wave 0.8s ease-in-out infinite alternate;
+}
+.audio-player__waveform span:nth-child(1) { height: 8px;  animation-delay: 0s;    }
+.audio-player__waveform span:nth-child(2) { height: 14px; animation-delay: 0.1s;  }
+.audio-player__waveform span:nth-child(3) { height: 20px; animation-delay: 0.2s;  }
+.audio-player__waveform span:nth-child(4) { height: 14px; animation-delay: 0.3s;  }
+.audio-player__waveform span:nth-child(5) { height: 8px;  animation-delay: 0.4s;  }
+
+@keyframes wave {
+  from { transform: scaleY(0.4); }
+  to   { transform: scaleY(1); }
+}
+
+/* ── Tips ─────────────────────────────────── */
+.voice-agent__tips {
+  width: 100%;
+  padding: 20px 24px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.tips-heading {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 10px;
+}
+
+.tips-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tips-list li {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  padding-left: 12px;
+  position: relative;
+}
+
+.tips-list li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--primary-light);
+}
